@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # proyekmobile
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Proyek3Kelompok4-Mobile
+Proyek 3 Kelompok 4 - Aplikasi Pendukung Validasi Kehadiran Pegawai
+>>>>>>> d825b97d5e61d2a64c70722ce0568748643127de
