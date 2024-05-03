@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'rekapitulasi.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -31,7 +32,8 @@ class LoginForm extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
                 style: TextStyle(fontSize: 16),
               ),
@@ -45,12 +47,13 @@ class LoginForm extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
                 style: TextStyle(fontSize: 16),
               ),
             ),
-                        Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -89,11 +92,17 @@ class LoginForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextButton(
                 onPressed: () {
-                  // Respond to button press
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Rekapitulasi()),
+                  );
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 82, 16, 234)),
-                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(16)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 82, 16, 234)),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      EdgeInsets.all(16)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
