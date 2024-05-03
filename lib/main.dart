@@ -11,6 +11,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -23,7 +24,7 @@ class LoginForm extends StatelessWidget {
                 height: 100,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
@@ -35,7 +36,7 @@ class LoginForm extends StatelessWidget {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 12),
               ),
             ),
             SizedBox(height: 10),
@@ -50,7 +51,7 @@ class LoginForm extends StatelessWidget {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 12),
               ),
             ),
             Padding(
@@ -65,13 +66,12 @@ class LoginForm extends StatelessWidget {
                     child: Text(
                       'Lupa Kata Sandi',
                       style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 12.0,
-                        decoration: TextDecoration.underline,
+                        color: Color.fromARGB(255, 68, 69, 69),
+                        fontSize: 10.0,
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 65),
                   TextButton(
                     onPressed: () {
                       // Handle button press
@@ -79,9 +79,8 @@ class LoginForm extends StatelessWidget {
                     child: Text(
                       'Belum Punya Akun?',
                       style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 12.0,
-                        decoration: TextDecoration.underline,
+                        color: Color.fromARGB(255, 68, 69, 69),
+                        fontSize: 10.0,
                       ),
                     ),
                   ),
@@ -89,7 +88,7 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 100),
               child: TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -102,18 +101,18 @@ class LoginForm extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all<Color>(
                       Color.fromARGB(255, 82, 16, 234)),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.all(16)),
+                      EdgeInsets.all(10)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(300, 50)),
+
                 ),
                 child: Text(
                   "Masuk",
                   style: TextStyle(
-                    letterSpacing: 2,
+                    letterSpacing: 1,
                     color: Colors.white,
                     fontSize: 12,
                   ),

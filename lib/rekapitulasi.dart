@@ -57,13 +57,13 @@ class _RekapitulasiState extends State<Rekapitulasi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('Rekapitulasi Kehadiran'),
+        title: Text(
+          'Rekapitulasi Kehadiran',
+          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
         iconTheme: IconThemeData(color: Colors.white),
-        titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          ),
         backgroundColor: Color.fromARGB(255, 82, 16, 234),
         actions: [
           PopupMenuButton<String>(
@@ -72,7 +72,7 @@ class _RekapitulasiState extends State<Rekapitulasi> {
               return ['Hari Ini', 'Minggu Ini', 'Bulan Ini', 'Semua'].map((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice),
+                  child: Text(choice, style: TextStyle(color: Colors.black)), // Warna teks hitam
                 );
               }).toList();
             },
@@ -80,13 +80,18 @@ class _RekapitulasiState extends State<Rekapitulasi> {
         ],
       ),
       body: ListView.builder(
-        itemCount: _attendanceData.length,
+        itemCount: _attendanceData.length * 2 - 1, // Menghitung jumlah item dan garis pemisah
         itemBuilder: (context, index) {
-          final attendance = _attendanceData[index];
+          if (index.isOdd) return Divider(height: 1); // Tambahkan garis pemisah pada indeks ganjil
+          final realIndex = index ~/ 2; // Hitung indeks asli dari item
+          final attendance = _attendanceData[realIndex];
           return ListTile(
-            title: Text(attendance['name']),
-            subtitle: Text(attendance['status']),
-            trailing: Text(DateFormat('yyyy-MM-dd').format(attendance['date'])),
+            title: Text(attendance['name'], style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+            subtitle: Text(
+              attendance['status'],
+              style: TextStyle(color: attendance['status'] == 'Hadir' ? Colors.green : Colors.red, fontSize: 12),
+            ),
+            trailing: Text(DateFormat('yyyy-MM-dd').format(attendance['date']), style: TextStyle(color: Colors.grey)),
           );
         },
       ),
