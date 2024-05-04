@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'rekapitulasi.dart';
-import 'daftar.dart';
+import 'package:intl/intl.dart';
+import 'rekapitulasi.dart'; // Jangan lupa untuk mengimpor file yang diperlukan
 
-void main() {
-  runApp(MaterialApp(
-    home: LoginForm(),
-  ));
+class RegisterForm extends StatefulWidget {
+  @override
+  _RegisterFormState createState() => _RegisterFormState(); // Ubah _DaftarState menjadi _RegisterFormState
 }
 
-class LoginForm extends StatelessWidget {
+class _RegisterFormState extends State<RegisterForm> { // Ubah _DaftarState menjadi _RegisterFormState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +25,21 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Nama Lengkap',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                ),
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
@@ -65,24 +79,7 @@ class LoginForm extends StatelessWidget {
                       // Handle button press
                     },
                     child: Text(
-                      'Lupa Kata Sandi',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 68, 69, 69),
-                        fontSize: 10.0,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 65),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegisterForm()),
-                      );
-                    },
-                    child: Text(
-                      'Belum Punya Akun?',
+                      'Sudah Punya Akun?',
                       style: TextStyle(
                         color: Color.fromARGB(255, 68, 69, 69),
                         fontSize: 10.0,
@@ -112,10 +109,9 @@ class LoginForm extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-
                 ),
                 child: Text(
-                  "Masuk",
+                  "Daftar",
                   style: TextStyle(
                     letterSpacing: 1,
                     color: Colors.white,
@@ -129,4 +125,10 @@ class LoginForm extends StatelessWidget {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: RegisterForm(),
+  ));
 }
