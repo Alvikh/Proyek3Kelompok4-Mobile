@@ -30,21 +30,6 @@ class _RegisterFormState extends State<RegisterForm> { // Ubah _DaftarState menj
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Nama Lengkap',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                ),
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextFormField(
-                decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -61,6 +46,21 @@ class _RegisterFormState extends State<RegisterForm> { // Ubah _DaftarState menj
               child: TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Kata Sandi',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                ),
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Konfirmasi Kata Sandi',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
