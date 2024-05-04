@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'rekapitulasi.dart'; // Jangan lupa untuk mengimpor file yang diperlukan
+import 'rekapitulasi.dart'; 
+import 'main.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -76,7 +77,11 @@ class _RegisterFormState extends State<RegisterForm> { // Ubah _DaftarState menj
                 children: [
                   TextButton(
                     onPressed: () {
-                      // Handle button press
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginForm()),
+                      );
                     },
                     child: Text(
                       'Sudah Punya Akun?',
