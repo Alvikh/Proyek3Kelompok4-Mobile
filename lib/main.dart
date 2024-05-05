@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'rekapitulasi.dart';
+import 'riwayat.dart';
 import 'daftar.dart';
 
 void main() {
@@ -99,7 +99,7 @@ class LoginForm extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Rekapitulasi()),
+                        builder: (context) => Riwayat()),
                   );
                 },
                 style: ButtonStyle(

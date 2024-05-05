@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'rekapitulasi.dart'; 
+import 'riwayat.dart'; 
 import 'main.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -101,7 +101,7 @@ class _RegisterFormState extends State<RegisterForm> { // Ubah _DaftarState menj
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Rekapitulasi()),
+                        builder: (context) => Riwayat()),
                   );
                 },
                 style: ButtonStyle(

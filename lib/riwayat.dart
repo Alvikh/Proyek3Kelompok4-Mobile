@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:latihan/rekapitulasi_bulan_ini.dart';
+import 'rekapitulasi_bulan_ini.dart';
 
-class Rekapitulasi extends StatefulWidget {
+class Riwayat extends StatefulWidget {
   @override
-  _RekapitulasiState createState() => _RekapitulasiState();
+  _RiwayatState createState() => _RiwayatState();
 }
 
-class _RekapitulasiState extends State<Rekapitulasi> {
+class _RiwayatState extends State<Riwayat> {
   List<Map<String, dynamic>> _attendanceData = [
     {'name': 'Alvi kh', 'status': 'Hadir', 'date': DateTime.now()},
-    {'name': 'Dina Intan K', 'status': 'Hadir', 'date': DateTime.now().subtract(Duration(days: 3))},
-    {'name': 'Rayya RR', 'status': 'Tidak Hadir', 'date': DateTime.now().subtract(Duration(days: 10))},
-    {'name': 'Alvi kh', 'status': 'Hadir', 'date': DateTime.now()},
-    {'name': 'Dina Intan K', 'status': 'Hadir', 'date': DateTime.now().subtract(Duration(days: 3))},
-    {'name': 'Rayya RR', 'status': 'Tidak Hadir', 'date': DateTime.now().subtract(Duration(days: 10))},
-    {'name': 'Alvi kh', 'status': 'Hadir', 'date': DateTime.now()},
-    {'name': 'Dina Intan K', 'status': 'Hadir', 'date': DateTime.now().subtract(Duration(days: 3))},
-    {'name': 'Rayya RR', 'status': 'Tidak Hadir', 'date': DateTime.now().subtract(Duration(days: 10))},
+    {'name': 'Dina Intan K', 'status': 'Hadir', 'date': DateTime.now().subtract(Duration(days: 1))},
+    {'name': 'Rayya RR', 'status': 'Hadir', 'date': DateTime.now().subtract(Duration(days: 2))},
   ];
 
   late List<Map<String, dynamic>> _originalAttendanceData = List<Map<String, dynamic>>.from(_attendanceData);
 
-  String _selectedTimeRange = 'Hari Ini';
+  String _WaktuTerpilih = 'Hari Ini';
 
   void _filterAttendanceData(String timeRange) {
     setState(() {
-      _selectedTimeRange = timeRange;
+      _WaktuTerpilih = timeRange;
       switch (timeRange) {
         case 'Hari Ini':
           _attendanceData = _originalAttendanceData.where((entry) => isToday(entry['date'])).toList();
@@ -36,11 +32,11 @@ class _RekapitulasiState extends State<Rekapitulasi> {
           _attendanceData = _originalAttendanceData.where((entry) => entry['date'].isAfter(lastWeek)).toList();
           break;
         case 'Bulan Ini':
-          final firstDayOfMonth = DateTime(DateTime.now().year, DateTime.now().month, 1);
-          _attendanceData = _originalAttendanceData.where((entry) => entry['date'].isAfter(firstDayOfMonth)).toList();
-          break;
-        case 'Semua':
-          _attendanceData = List<Map<String, dynamic>>.from(_originalAttendanceData);
+          Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Rekapitulasi()),
+                  );
           break;
         default:
           break;
@@ -48,7 +44,6 @@ class _RekapitulasiState extends State<Rekapitulasi> {
     });
   }
 
-  // Helper function to check if a given date is today
   bool isToday(DateTime date) {
     final now = DateTime.now();
     return date.year == now.year && date.month == now.month && date.day == now.day;
@@ -60,7 +55,7 @@ class _RekapitulasiState extends State<Rekapitulasi> {
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
         title: Text(
-          'Rekapitulasi Kehadiran',
+          'Riwayat Kehadiran',
           style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         iconTheme: IconThemeData(color: Colors.white),
@@ -69,10 +64,10 @@ class _RekapitulasiState extends State<Rekapitulasi> {
           PopupMenuButton<String>(
             onSelected: _filterAttendanceData,
             itemBuilder: (BuildContext context) {
-              return ['Hari Ini', 'Minggu Ini', 'Bulan Ini', 'Semua'].map((String choice) {
+              return ['Hari Ini', 'Minggu Ini', 'Bulan Ini'].map((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice, style: TextStyle(color: Colors.black)), // Warna teks hitam
+                  child: Text(choice, style: TextStyle(color: Colors.black)),
                 );
               }).toList();
             },
@@ -80,10 +75,10 @@ class _RekapitulasiState extends State<Rekapitulasi> {
         ],
       ),
       body: ListView.builder(
-        itemCount: _attendanceData.length * 2 - 1, // Menghitung jumlah item dan garis pemisah
+        itemCount: _attendanceData.length * 2 - 1,
         itemBuilder: (context, index) {
-          if (index.isOdd) return Divider(height: 1); // Tambahkan garis pemisah pada indeks ganjil
-          final realIndex = index ~/ 2; // Hitung indeks asli dari item
+          if (index.isOdd) return Divider(height: 1);
+          final realIndex = index ~/ 2;
           final attendance = _attendanceData[realIndex];
           return ListTile(
             title: Text(attendance['name'], style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
