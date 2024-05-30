@@ -36,49 +36,6 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 254, 255, 255),
-              ),
-              child: Center(
-                child: Image.asset(
-                  'assets/Logo.png',
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                // Handle navigation to Home
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.bar_chart),
-              title: Text('Laporan'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LaporanPage()),
-                );
-            },
-
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profil'),
-              onTap: () {
-                // Handle navigation to Profil
-              },
-            ),
-          ],
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -109,34 +66,33 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-bottomNavigationBar: BottomNavigationBar(
-  items: const <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: 'Home',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.bar_chart),
-      label: 'Laporan',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.account_circle),
-      label: 'Profil',
-    ),
-  ],
-  currentIndex: 0, // Set the initial selected index
-  selectedItemColor: Color(0xFF4A90E2),
-  onTap: (index) {
-    // Handle bottom navigation item tap
-    if (index == 1) { // Check if "Laporan" item is tapped
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LaporanPage()),
-      );
-    }
-  },
-),
-
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart),
+            label: 'Laporan',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profil',
+          ),
+        ],
+        currentIndex: 0, // Set the initial selected index
+        selectedItemColor: Color(0xFF4A90E2),
+        onTap: (index) {
+          // Handle bottom navigation item tap
+          if (index == 1) { // Check if "Laporan" item is tapped
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LaporanPage()),
+            );
+          }
+        },
+      ),
     );
   }
 
