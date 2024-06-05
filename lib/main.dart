@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'AutoAttend - Login',
       theme: ThemeData(
         primaryColor: Color(0xFF4A90E2),
-        fontFamily: 'Arial',
+        fontFamily: 'Montserrat',
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFF4A90E2),
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginPage(),
         '/home': (context) => MyHomePage(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'api_service.dart'; // Import the API service
 import 'laporan_page.dart'; 
 
 void main() {
@@ -18,13 +19,36 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late Future<List<Absensi>> futureAbsensi;
+
+  @override
+  void initState() {
+    super.initState();
+    futureAbsensi = ApiService().fetchAbsensiTerbaru();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: Color(0xFF4A90E2),
+        title: Row(
+          children: [
+            Image.asset(
+                    'assets/Logo.png',
+                    width: 32,
+                    height: 32,
+                  ),
+            SizedBox(width: 10),
+            Text('Discover'),
+          ],
+        ),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.notifications),
@@ -47,10 +71,11 @@ class MyHomePage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                _buildTimeBox('Waktu Masuk', '07.00'),
-                _buildTimeBox('Waktu Pulang', '15.00'),
+                Expanded(child: _buildTimeBox('Waktu Masuk', '07.00')),
+                SizedBox(width: 10), // Add some space between the boxes
+                Expanded(child: _buildTimeBox('Waktu Pulang', '15.00')),
               ],
             ),
             SizedBox(height: 20),
@@ -59,9 +84,33 @@ class MyHomePage extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
-            _buildAttendanceHistory(
-              '12345 – Alvi Khoirunnisa',
-              'MASUK – 07:00 WIB – Ruang A',
+            Expanded(
+              child: FutureBuilder<List<Absensi>>(
+                future: futureAbsensi,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        Absensi absensi = snapshot.data![index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: _buildAttendanceHistory(
+                            absensi.namaUser,
+                            absensi.waktuMasuk != null
+                                ? 'MASUK – ${absensi.waktuMasuk} WIB'
+                                : 'KELUAR – ${absensi.waktuKeluar} WIB',
+                          ),
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+
+                  return Center(child: CircularProgressIndicator());
+                },
+              ),
             ),
           ],
         ),
@@ -70,7 +119,7 @@ class MyHomePage extends StatelessWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),

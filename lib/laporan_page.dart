@@ -5,9 +5,18 @@ class LaporanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Laporan Kehadiran'),
-        backgroundColor: Color(0xFF4A90E2),
-        automaticallyImplyLeading: false, // Menonaktifkan tombol kembali
+        title: Row(
+          children: [
+            Image.asset(
+                    'assets/Logo.png',
+                    width: 32,
+                    height: 32,
+                  ),
+            SizedBox(width: 10),
+            Text('Laporan'),
+          ],
+        ),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.notifications),
@@ -195,7 +204,7 @@ class LaporanPage extends StatelessWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
