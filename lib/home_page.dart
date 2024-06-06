@@ -90,19 +90,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     ListTile(
                       title: Text('Temukan Pegawai A'),
                       onTap: () {
-                        // Handle search for Pegawai A
                       },
                     ),
                     ListTile(
                       title: Text('Temukan Pegawai B'),
                       onTap: () {
-                        // Handle search for Pegawai B
                       },
                     ),
                     ListTile(
                       title: Text('Temukan Pegawai C'),
                       onTap: () {
-                        // Handle search for Pegawai C
                       },
                     ),
                   ],

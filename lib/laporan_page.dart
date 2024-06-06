@@ -29,6 +29,82 @@ class _LaporanPageState extends State<LaporanPage> {
     }
   }
 
+  void _showNotificationBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(20),
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Notifikasi Terkini',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'Tidak ada notifikasi.',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showSearchBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(20),
+          height: 300,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Pencarian',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Cari...',
+                ),
+              ),
+              SizedBox(height: 10),
+              Expanded(
+                child: ListView(
+                  children: [
+                    ListTile(
+                      title: Text('Temukan Pegawai A'),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text('Temukan Pegawai B'),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text('Temukan Pegawai C'),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,18 +117,18 @@ class _LaporanPageState extends State<LaporanPage> {
               height: 32,
             ),
             SizedBox(width: 10),
-            Text('Laporan', style: TextStyle(fontSize: 16)),
+            Text('Laporan'),
           ],
         ),
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.search),
+            onPressed: _showSearchBottomSheet,
+          ),
+          IconButton(
             icon: Icon(Icons.notifications),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Notification clicked')),
-              );
-            },
+            onPressed: _showNotificationBottomSheet,
           ),
         ],
       ),
