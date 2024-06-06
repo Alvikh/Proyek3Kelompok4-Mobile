@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'api_service.dart'; // Import the API service
-import 'laporan_page.dart'; 
+import 'api_service.dart';
+import 'laporan_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,6 +33,36 @@ class _MyHomePageState extends State<MyHomePage> {
     futureAbsensi = ApiService().fetchAbsensiTerbaru();
   }
 
+  void _showNotificationBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Notifikasi Terkini',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'Tidak ada notifikasi.',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           children: [
             Image.asset(
-                    'assets/Logo.png',
-                    width: 32,
-                    height: 32,
-                  ),
+              'assets/Logo.png',
+              width: 32,
+              height: 32,
+            ),
             SizedBox(width: 10),
             Text('Discover'),
           ],
@@ -52,11 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.notifications),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Notification clicked')),
-              );
-            },
+            onPressed: _showNotificationBottomSheet,
           ),
         ],
       ),
@@ -66,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Selamat Datang!',
+              'Selamat Pagi, Ray!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -74,13 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Expanded(child: _buildTimeBox('Waktu Masuk', '07.00')),
-                SizedBox(width: 10), // Add some space between the boxes
+                SizedBox(width: 10),
                 Expanded(child: _buildTimeBox('Waktu Pulang', '15.00')),
               ],
             ),
             SizedBox(height: 20),
             Text(
-              'Riwayat Kehadiran Terakhir',
+              'Riwayat Deteksi Terkini',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -130,11 +156,10 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Profil',
           ),
         ],
-        currentIndex: 0, // Set the initial selected index
+        currentIndex: 0,
         selectedItemColor: Color(0xFF4A90E2),
         onTap: (index) {
-          // Handle bottom navigation item tap
-          if (index == 1) { // Check if "Laporan" item is tapped
+          if (index == 1) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => LaporanPage()),
@@ -165,7 +190,10 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(height: 10),
           Text(
             time,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xFF4A90E2)),
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4A90E2)),
           ),
         ],
       ),

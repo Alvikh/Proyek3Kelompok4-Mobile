@@ -8,12 +8,12 @@ class LaporanPage extends StatelessWidget {
         title: Row(
           children: [
             Image.asset(
-                    'assets/Logo.png',
-                    width: 32,
-                    height: 32,
-                  ),
+              'assets/Logo.png',
+              width: 32,
+              height: 32,
+            ),
             SizedBox(width: 10),
-            Text('Laporan'),
+            Text('Laporan', style: TextStyle(fontSize: 16)),
           ],
         ),
         backgroundColor: Color.fromARGB(255, 255, 255, 255),

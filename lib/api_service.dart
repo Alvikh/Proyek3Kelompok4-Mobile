@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:network_info_plus/network_info_plus.dart';
 
 class Absensi {
   final int id;
@@ -31,16 +32,27 @@ class Absensi {
 }
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.141.249:8000';
+  late String baseUrl;
+
+  ApiService() {
+    _initializeBaseUrl();
+  }
+
+  Future<void> _initializeBaseUrl() async {
+    final info = NetworkInfo();
+    //final ip = await info.getWifiIP();
+    baseUrl = 'http://192.168.1.17:8000';
+  }
 
   Future<List<Absensi>> fetchAbsensiTerbaru() async {
+    await _initializeBaseUrl();
     final response = await http.get(Uri.parse('$baseUrl/absensi/terbaru'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
       return jsonResponse.map((data) => Absensi.fromJson(data)).toList();
     } else {
-      throw Exception('Failed to load absensi');
+      throw Exception('Tidak dapat menemukan data.');
     }
   }
 }
