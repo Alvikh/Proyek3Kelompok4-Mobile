@@ -1,6 +1,34 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class LaporanPage extends StatelessWidget {
+class LaporanPage extends StatefulWidget {
+  @override
+  _LaporanPageState createState() => _LaporanPageState();
+}
+
+class _LaporanPageState extends State<LaporanPage> {
+  List<Map<String, dynamic>> laporanData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final response =
+        await http.get(Uri.parse('http://192.168.1.17:8000/api/laporan2'));
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData.containsKey('data')) {
+        setState(() {
+          laporanData = List<Map<String, dynamic>>.from(responseData['data']);
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +83,7 @@ class LaporanPage extends StatelessWidget {
                       Text('Bulan:'),
                       TextField(
                         decoration: InputDecoration(
-                          hintText: 'Mei',
+                          hintText: 'Juni',
                         ),
                       ),
                     ],
@@ -73,7 +101,8 @@ class LaporanPage extends StatelessWidget {
                   },
                   child: Text('Tampilkan'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue, // Ganti primary dengan backgroundColor
+                    backgroundColor:
+                        Colors.blue, // Ganti primary dengan backgroundColor
                   ),
                 ),
                 SizedBox(width: 8.0),
@@ -83,7 +112,8 @@ class LaporanPage extends StatelessWidget {
                   },
                   child: Text('Excel'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green, // Ganti primary dengan backgroundColor
+                    backgroundColor:
+                        Colors.green, // Ganti primary dengan backgroundColor
                   ),
                 ),
               ],
@@ -99,100 +129,53 @@ class LaporanPage extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Tanggal', style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Text('Tanggal',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Nama', style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Text('Waktu Masuk',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Waktu Masuk', style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Text('Waktu Keluar',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Waktu Pulang', style: TextStyle(fontWeight: FontWeight.bold)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Keterangan', style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Text('Keterangan',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
-                    // Data dummy
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('01-05-2024'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Alvi Kh'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('08:00'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('17:00'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Hadir'),
-                        ),
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('02-05-2024'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Alvi Kh'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('08:30'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('17:30'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Hadir'),
-                        ),
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('03-05-2024'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Alvi Kh'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('09:00'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('18:00'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Hadir'),
-                        ),
-                      ],
-                    ),
-                    // Tambahkan lebih banyak TableRow di sini sesuai kebutuhan
+                    for (var data in laporanData)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(data['f_tanggal'] != null
+                                ? data['f_tanggal']
+                                : ''),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(data['f_waktu_masuk'] != null
+                                ? data['f_waktu_masuk']
+                                : ''),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(data['f_waktu_keluar'] != null
+                                ? data['f_waktu_keluar']
+                                : ''),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('Ruang A'),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),

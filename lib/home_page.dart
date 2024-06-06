@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Expanded(child: _buildTimeBox('Waktu Masuk', '07.00')),
                 SizedBox(width: 10),
-                Expanded(child: _buildTimeBox('Waktu Pulang', '15.00')),
+                Expanded(child: _buildTimeBox('Waktu Pulang', '12.00')),
               ],
             ),
             SizedBox(height: 20),
@@ -180,8 +180,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: _buildAttendanceHistory(
                             absensi.namaUser,
                             absensi.waktuMasuk != null
-                                ? 'MASUK – ${absensi.waktuMasuk} WIB'
-                                : 'KELUAR – ${absensi.waktuKeluar} WIB',
+                                ? 'RUANG A – ${absensi.waktuMasuk} WIB'
+                                : 'RUANG A – ${absensi.waktuKeluar} WIB',
                           ),
                         );
                       },
