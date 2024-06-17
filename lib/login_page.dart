@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: 20),
                   _buildTextField(
                     label: 'Email',
-                    hint: 'name@example.com',
+                    hint: 'nama@contoh.com',
                     isPassword: false,
                   ),
                   SizedBox(height: 15),
@@ -71,7 +71,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    '© kelompok3-2024',
+                    'Kelompok 4 - © 2024',
                     style: TextStyle(color: Colors.grey),
                   ),
                 ],

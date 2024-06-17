@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:network_info_plus/network_info_plus.dart';
 
 class Absensi {
-  final int id;
+  final String id;
   final String namaUser;
   final String profilUser;
   final String? waktuMasuk;
@@ -39,14 +38,12 @@ class ApiService {
   }
 
   Future<void> _initializeBaseUrl() async {
-    final info = NetworkInfo();
-    //final ip = await info.getWifiIP();
-    baseUrl = 'http://192.168.1.17:8000';
+    baseUrl = 'https://futurespeed.my.id:443/autoattend';
   }
 
   Future<List<Absensi>> fetchAbsensiTerbaru() async {
     await _initializeBaseUrl();
-    final response = await http.get(Uri.parse('$baseUrl/absensi/terbaru'));
+    final response = await http.get(Uri.parse('$baseUrl/index.php?id=4'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
