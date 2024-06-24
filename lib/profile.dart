@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,8 +17,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -28,12 +25,12 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(16.0),
-                height: 110,
+                height: 150,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(16),
                   gradient: LinearGradient(
-                    colors: [Colors.blue.shade500, Colors.teal.shade300],
+                    colors: [Colors.blue, Colors.blue],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -42,16 +39,15 @@ class ProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      width: 60,
-                      height: 65,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(16.0),
                         color: Colors.grey[300],
-                        shape: BoxShape.rectangle,
                       ),
                       child: Icon(
                         Icons.person,
-                        size: 60,
+                        size: 80,
                         color: Colors.grey[600],
                       ),
                     ),
@@ -63,17 +59,17 @@ class ProfilePage extends StatelessWidget {
                         Text(
                           'Username',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(height: 4),
                         Text(
                           'nama@contoh.com',
                           style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
+                            fontSize: 16,
+                            color: Colors.white70,
                           ),
                         ),
                       ],
@@ -152,19 +148,11 @@ class _ProfileFormState extends State<ProfileForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Profile',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.grey[800],
-            ),
-          ),
-          SizedBox(height: 12),
-          Text(
             'INFORMASI USER',
             style: TextStyle(
-              fontSize: 15,
-              color: Colors.grey[800],
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
             ),
           ),
           SizedBox(height: 12),
@@ -178,7 +166,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       'Username',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontSize: 14,
                         color: Colors.grey[800],
                       ),
                     ),
@@ -187,7 +175,9 @@ class _ProfileFormState extends State<ProfileForm> {
                       controller: _usernameController,
                       decoration: InputDecoration(
                         hintText: 'username',
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
                         contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                       ),
                       validator: (value) {
@@ -209,7 +199,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       'Email',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontSize: 14,
                         color: Colors.grey[800],
                       ),
                     ),
@@ -218,7 +208,9 @@ class _ProfileFormState extends State<ProfileForm> {
                       controller: _emailController,
                       decoration: InputDecoration(
                         hintText: 'nama@contoh.com',
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
                         contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                       ),
                       validator: (value) {
@@ -237,19 +229,26 @@ class _ProfileFormState extends State<ProfileForm> {
           Text(
             'Foto Profile',
             style: TextStyle(
-              fontSize: 13,
-              color: Colors.grey[800],
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(height: 8),
           Row(
             children: [
               TextButton(
                 onPressed: _openFileExplorer,
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
                 child: Text(
                   'Pilih File',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -258,7 +257,9 @@ class _ProfileFormState extends State<ProfileForm> {
                 child: TextFormField(
                   readOnly: true,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                   ),
                   initialValue: _filePath.isEmpty ? 'Tidak ada file yang dipilih' : _filePath,
@@ -274,8 +275,9 @@ class _ProfileFormState extends State<ProfileForm> {
           Text(
             'GANTI PASSWORD',
             style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[800],
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
             ),
           ),
           SizedBox(height: 8),
@@ -289,7 +291,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       'Password Baru',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontSize: 14,
                         color: Colors.grey[800],
                       ),
                     ),
@@ -297,7 +299,9 @@ class _ProfileFormState extends State<ProfileForm> {
                     TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
                         contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                       ),
                       obscureText: true,
@@ -320,7 +324,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       'Konfirmasi Password',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontSize: 14,
                         color: Colors.grey[800],
                       ),
                     ),
@@ -328,7 +332,9 @@ class _ProfileFormState extends State<ProfileForm> {
                     TextFormField(
                       controller: _confirmPasswordController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
                         contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                       ),
                       obscureText: true,
@@ -349,33 +355,28 @@ class _ProfileFormState extends State<ProfileForm> {
           ),
           SizedBox(height: 32),
           Center(
-            child: Column(
-              children: [
-                SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Processing Data')),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.indigo[700],
-                    padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  child: Text(
-                    'Simpan',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Processing Data')),
+                  );
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-              ],
+              ),
+              child: Text(
+                'Simpan',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ),
         ],
