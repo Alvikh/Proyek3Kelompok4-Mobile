@@ -113,7 +113,7 @@ class _LaporanPageState extends State<LaporanPage> {
                   children: [
                     TableRow(
                       decoration: BoxDecoration(
-                        color: Colors.teal.shade100,
+                        color: Colors.blue,
                       ),
                       children: [
                         Padding(
@@ -121,7 +121,7 @@ class _LaporanPageState extends State<LaporanPage> {
                           child: Text('Tanggal',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.teal.shade800,
+                                color: Colors.white,
                               )),
                         ),
                         Padding(
@@ -129,7 +129,7 @@ class _LaporanPageState extends State<LaporanPage> {
                           child: Text('Waktu Terdeteksi',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.teal.shade800,
+                                color: Colors.white,
                               )),
                         ),
                         Padding(
@@ -137,7 +137,7 @@ class _LaporanPageState extends State<LaporanPage> {
                           child: Text('Keterangan',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.teal.shade800,
+                                color: Colors.white,
                               )),
                         ),
                       ],

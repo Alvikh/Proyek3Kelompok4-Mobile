@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(MyApp());
@@ -98,7 +101,7 @@ class _ProfileFormState extends State<ProfileForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  String _filePath = ''; // Variable to store the selected file path
+  File? _imageFile;
 
   @override
   void dispose() {
@@ -109,35 +112,45 @@ class _ProfileFormState extends State<ProfileForm> {
     super.dispose();
   }
 
-  void _openFileExplorer() async {
-    String? filePath = await showDialog<String>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text('Pilih File'),
-        content: Text('Isi path file yang dipilih'),
-        actions: <Widget>[
-          TextButton(
-            child: Text('Batal'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: Text('Pilih'),
-            onPressed: () {
-              // For simplicity, returning a placeholder file path
-              Navigator.of(context).pop('path/to/file');
-            },
-          ),
-        ],
-      ),
-    );
+  Future<void> _pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
 
-    if (filePath != null) {
+    if (pickedFile != null) {
       setState(() {
-        _filePath = filePath;
+        _imageFile = File(pickedFile.path);
       });
     }
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Gallery'),
+                onTap: () {
+                  _pickImage(ImageSource.gallery);
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.photo_camera),
+                title: Text('Camera'),
+                onTap: () {
+                  _pickImage(ImageSource.camera);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -238,7 +251,7 @@ class _ProfileFormState extends State<ProfileForm> {
           Row(
             children: [
               TextButton(
-                onPressed: _openFileExplorer,
+                onPressed: () => _showPicker(context),
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.blue,
                   shape: RoundedRectangleBorder(
@@ -262,7 +275,9 @@ class _ProfileFormState extends State<ProfileForm> {
                     ),
                     contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                   ),
-                  initialValue: _filePath.isEmpty ? 'Tidak ada file yang dipilih' : _filePath,
+                  initialValue: _imageFile == null
+                      ? 'Tidak ada file yang dipilih'
+                      : _imageFile!.path,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[800],
